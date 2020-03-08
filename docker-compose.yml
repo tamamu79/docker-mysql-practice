@@ -1,0 +1,14 @@
+# versionは3系が最新版で、versionによって書き方が異なる
+version: "3"
+services:
+  db:
+    build: ./mysql/   #Dockerfileからビルドすることを示す
+    container_name: mysql_host
+    image: original_mysql_world # イメージの名前
+    env_file: .env
+    volumes:
+      - ./mysql/db/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
